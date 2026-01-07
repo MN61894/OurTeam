@@ -1,0 +1,816 @@
+:root {
+  --black: #0b0b0b;
+  --dark-black: #050505;
+  --orange: #ff8c28;
+  --orange-soft: #ff8c28cc;
+  --gray: #b5b5b5;
+}
+
+* {
+  direction: rtl;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ html { scroll-behavior: smooth; }
+/* الخط المخصص */
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('fonts/MyCustomFont.woff2') format('woff2'),
+       url('fonts/MyCustomFont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html, body {
+  background-image: url("image/bg-01.jpg");
+  background-size: cover;
+  background-position: center;
+
+  font-family: 'MyCustomFont', 'IBM Plex Arabic', system-ui, sans-serif;
+  color: white;
+  direction: rtl;
+}
+
+.container {
+  width: 1200px;
+  margin: auto;
+}
+
+/* ===== HEADER ===== */
+.header {
+  padding: 25px 0;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 10%;
+  min-width: 120px;
+  height: 90px;
+  margin-left: 20px;
+
+  background: url("image/logo.png") center / contain no-repeat;
+}
+.nav {
+  display: flex;
+  
+  gap: 30px;
+}
+
+.nav a {
+  color: var(--gray);
+  width: 100px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  position: relative;
+  padding: 8px 14px;
+  border-radius: 5px;
+}
+
+/* الإطار المتدرج يظهر عند hover */
+.nav a::before {
+ content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 5px;
+  padding: 2px;
+
+  background: linear-gradient(
+    30deg,
+    rgba(20, 15, 10, 0.3),
+    rgba(140, 70, 25, 0.4),
+    rgba(255, 140, 40, 0.8)
+  );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+
+/* ===== الحالة النشطة (بوردر كامل + إضاءة) ===== */
+.nav a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 5px;
+  padding: 2px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255,140,40,1),
+    rgba(255,180,90,1)
+  );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+/* ===== Hover أو Click ===== */
+.nav a:hover::before,
+.nav a:active::before {
+  opacity: 0;
+}
+
+.nav a:hover::after,
+.nav a:active::after {
+  opacity: 1;
+}
+
+/* Glow */
+.nav a:hover {
+  box-shadow: 0 0 25px rgba(255,140,40,0.6);
+}
+
+
+
+
+/* ===== BUTTONS ===== */
+.btn-primary {
+  position: relative;
+  padding: 12px 26px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(
+    130deg,
+    rgba(20, 15, 10, 0.6),
+    rgba(140, 70, 25, 0.7),
+    rgba(255, 140, 40, 0.9)
+  );
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+  z-index: 1;
+}
+
+/* ===== الإطار (مخفي افتراضيًا) ===== */
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: 5px;
+
+  background: linear-gradient(
+    30deg,
+    rgba(20, 15, 10, 0.4),
+    rgba(140, 70, 25, 0.6),
+    rgba(255, 140, 40, 1)
+  );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+/* ===== Hover / Click ===== */
+.btn-primary:hover {
+  background: transparent; /* ⬅️ يختفي التعبئة */
+  box-shadow: 0 0 28px rgba(255,140,40,0.6);
+  color: white;
+}
+
+.btn-primary:hover::before {
+  opacity: 1; /* ⬅️ يظهر الإطار */
+}
+
+
+
+.btn-outline {
+  position: relative;
+  background: transparent;
+  color: var(--orange);
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  z-index: 1;
+  font-weight: bold;
+   transition: background 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* الإطار المتدرج يظهر عند hover */
+.btn-outline::before {
+ content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+
+  background: linear-gradient(
+    30deg,
+    rgba(20, 15, 10, 0.3),
+    rgba(140, 70, 25, 0.4),
+    rgba(255, 140, 40, 0.8)
+  );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  opacity: 1;
+
+}
+
+/* ===== الحالة النشطة (بوردر كامل + إضاءة) ===== */
+.btn-outline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255,140,40,1),
+    rgba(255,180,90,1)
+  );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+/* ===== Hover أو Click ===== */
+.btn-outline:hover::before,
+.btn-outline:active::before {
+  opacity: 0;
+}
+
+.btn-outline:hover::after,
+.btn-outline:active::after {
+  opacity: 1;
+}
+
+/* Glow */
+.btn-outline:hover {
+  box-shadow: 0 0 25px rgba(255,140,40,0.6);
+}
+
+.btn-outline1{
+ position: relative;
+  background: transparent;
+  color:white;
+    padding: 10px 20px;
+  border-radius: 5px;
+font-size: 14px;
+  cursor: pointer;
+  z-index: 1;
+   border: 2px solid rgba(255, 140, 40, 0.6);
+  box-shadow: 0 0 25px rgba(255,140,40,0.9);
+}
+  
+.btn-outline1:hover{
+  transform: scale();
+   border: 2px solid rgba(255, 140, 40);
+  box-shadow: 0 0 25px rgba(255,140,40);
+}
+/* ===== HERO ===== */
+.hero {
+  padding: 80px 0;
+}
+
+.hero-grid {
+  display: grid;
+   grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+}
+
+.hero-text h1 {
+  font-size: 52px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  color: var(--gray);
+  max-width: 420px;
+  margin-bottom: 35px;
+  font-size: 18px;
+}
+
+.hero-text span {
+  color: var(--orange);
+}
+
+.hero-buttons {
+  display: flex;
+ 
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.hero-stats {
+    display: flex;
+   justify-content: center;
+
+  gap: 70px;
+   width: min(90%, 420px);
+  padding: 7px;
+   border-radius: 12px;
+   font-weight: bold;
+  border: 1px solid rgba(255, 140, 40, 0.6);
+    background: linear-gradient(
+    130deg,
+    rgba(20, 15, 10, 0.6),
+    rgba(140, 70, 25, 0.7),
+    rgba(255, 140, 40, 0.9)
+  );
+}
+
+.hero-stats div {
+  display: flex;
+  flex-direction: column;
+align-items: center;
+  gap: 5px;
+}
+
+.hero-users {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 30px;
+}
+
+/* الصور */
+.users-avatars {
+  display: flex;
+  align-items: center;
+}
+
+.users-avatars img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: -16px; /* التداخل */
+}
+
+/* النص */
+.users-text strong {
+  display: flex;
+  justify-content:center;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+}
+
+.users-text span {
+  font-size: 12px;
+  color: #aaa;
+}
+.users-avatars img {
+  box-shadow: 0 0 10px rgba(255,140,40,0.25);
+}
+.users-avatars img:hover {
+  transform: scale(1.1);
+  z-index: 2;
+}
+
+/* ===== PARTNERS STRIP ===== */
+.partners {
+  margin: 40px 0 80px;
+}
+
+.partners-box {
+  padding: 25px 60px;
+  background: linear-gradient(
+    90deg,
+    rgba(255,122,24,0.08),
+    rgba(255,122,24,0.02)
+  );
+  border-radius: 18px;
+  overflow: hidden; /* يخفي الزيادة */
+}
+
+.logos-track {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  width: max-content;
+  animation: logos-scroll 20s linear infinite;
+}
+
+.logos-track img {
+  height: 48px;
+  opacity: 0.7;
+  filter: grayscale(100%);
+  transition: 0.3s ease;
+  flex-shrink: 0;
+}
+
+.logos-track img:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+  transform: scale(1.3);
+}
+
+/* حركة الشعارات فقط */
+@keyframes logos-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-20%);
+  }
+}
+.logos-track {
+  animation: logos-scroll 20s linear infinite;
+}
+
+
+/* ===== HERO CARD ===== */
+.hero-card {
+  background: #111;
+  border-radius: 25px;
+  padding: 5px;
+}
+
+.card-image {
+  background-image: url("image/1.JPG");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 750px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 10px rgba(255, 140, 40, 1);
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  padding: 80px 0;
+}
+
+.section.dark {
+ 
+}
+
+.section-title {
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+/* ===== GRIDS ===== */
+.slider-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.slider {
+  overflow: hidden;   /* ⭐ يخفي الجزء الزائد */
+  scroll-behavior: smooth;
+  width: 100%;
+}
+
+.slider-track {
+  display: flex;
+  gap: 25px;
+  transition: transform 0.4s ease;
+}
+
+
+.slider-btn {
+  background: rgba(255,140,40,0.15);
+  border: 1px solid rgba(255,140,40,0.6);
+  color: var(--orange);
+  font-size: 28px;
+  width: 44px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 5px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.slider-btn.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+  filter: grayscale(1);
+}
+
+
+.slider-btn:hover {
+  background: rgba(255,140,40,0.3);
+}
+
+.prev {
+  margin-right: 10px;
+}
+
+.next {
+  margin-left: 10px;
+}
+
+
+.nft-card {
+  flex: 0 0 260px;   /* ⭐ يمنع التصغير */
+  width: 260px;
+  height: 300px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  background: #1a1a1a;
+}
+
+
+/* الصورة */
+.nft-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* التدرج السفلي + النص */
+.card-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 35%;
+  padding: 15px;
+  color: white;
+
+   background: linear-gradient(
+    30deg,
+    rgba(20, 15, 10, 0.6),
+    rgba(140, 70, 25, 0.6),
+    rgba(255, 140, 40, 0.8)
+  );
+
+}
+
+/* النص */
+.card-info h4 {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.card-info p {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-bottom: 10px;
+}
+
+/* السعر */
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+
+/* السعر */
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: bold;
+}
+ .nft-card:hover {
+  transform: translateY(-6px);
+  transition: 0.3s;
+}
+.nft-card img {
+  transition: 0.4s ease;
+}
+
+.nft-card:hover img {
+  transform: scale(1.05);
+}
+/* ===== آراء العملاء ===== */
+.testimonials {
+  padding: 120px 0;
+  background: #000;
+  color: white;
+  text-align: center;
+}
+
+/* العنوان الصغير */
+.section-subtitle {
+     font-size: 20px;
+  line-height: 1.7;
+  margin-bottom: 35px;
+    color: #ff8c28;
+  font-weight: bolder;
+
+
+}
+
+/* العنوان الرئيسي */
+.section-title {
+  letter-spacing: 2px;
+  color: #bdbdbd;
+  font-size: 32px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+/* الشبكة */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+/* الكرت */
+.testimonial-card {
+  background: #0d0d0d;
+  padding: 35px;
+  border-radius: 20px;
+  text-align: right;
+  position: relative;
+
+  border: 1px solid rgba(255, 140, 40, 0.35);
+  transition: all 0.4s ease;
+}
+
+/* الكرت الأوسط مميز */
+.testimonial-card.active {
+  box-shadow: 0 0 50px rgba(255, 140, 40, 0.45);
+  transform: translateY(-10px);
+}
+
+/* النجوم */
+.stars {
+  color: #ff8c28;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* النص */
+.testimonial-text {
+  font-size: 14px;
+  line-height: 1.9;
+  color: #ccc;
+  margin-bottom: 30px;
+}
+
+/* بيانات العميل */
+.testimonial-user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+ 
+}
+
+.testimonial-user img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.testimonial-user strong {
+  display: block;
+  font-size: 15px;
+}
+
+.testimonial-user span {
+  font-size: 12px;
+  color: #999;
+}
+
+/* Hover */
+.testimonial-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 35px rgba(255, 140, 40, 0.35);
+}
+
+
+
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.explore-card {
+  height: 200px;
+  background: #1a1a1a;
+  border-radius: 20px;
+}
+/* ===== CTA Section ===== */
+.cta {
+  position: relative;
+  padding: 120px 0 140px;
+}
+
+/* ===== Bottom Gradient Bar ===== */
+.cta::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 85%;
+  height: 4px;
+  border-radius: 10px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(255,140,40,0),
+    rgba(255,140,40,1),
+    rgba(255,180,90,1),
+    rgba(255,140,40,1),
+    rgba(255,140,40,0)
+  );
+
+  box-shadow:
+    0 0 20px rgba(255,140,40,0.6),
+    0 0 40px rgba(255,140,40,0.35);
+}
+
+/* ===== CTA Box ===== */
+.cta-box {
+  position: relative;
+  max-width: 900px;
+  margin: auto;
+  padding: 60px 50px;
+  text-align: center;
+  border-radius: 30px;
+  color: #e0e0e0;
+
+
+}
+
+/* ===== CTA Text ===== */
+.cta-box h2 {
+  font-size: 30px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+   color: rgba(255,140,40,0.7);
+}
+
+.cta-box span{
+  font-size: 35px;
+   color: var(--orange);
+}
+/* ===== Button ===== */
+.btn-primary {
+  padding: 14px 34px;
+  border-radius: 5px;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #000;
+
+  background: linear-gradient(
+    130deg,
+    rgba(255,140,40,1),
+    rgba(255,180,90,1)
+  );
+
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 30px rgba(255,140,40,0.7);
+  transform: translateY(-2px);
+  color: white;
+}
+
+
+.cta-text {
+  font-size: 20px;
+  line-height: 1.7;
+  margin-bottom: 35px;
+  color: #bdbdbd;
+}
