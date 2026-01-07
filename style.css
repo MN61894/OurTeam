@@ -459,7 +459,7 @@ align-items: center;
 }
 
 .card-image {
-  background-image: url("image/1.JPG");
+  background-image: url("image/1.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
