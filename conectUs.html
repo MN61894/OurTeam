@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>روابط التواصل الاجتماعي</title>
+  <style>
+ body {
+  margin: 0;
+  padding: 0;
+  background-image: url("image/bg.jpg");
+  background-size: cover;
+  background-position: center;
+
+  font-family: 'IBM Plex Arabic', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* ⭐ عمودي */
+  align-items: center;       /* ⭐ أفقي */
+  min-height: 100vh;
+}
+
+
+  .logo {
+  animation: fadeInDown 1s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0; /* ⭐ مهم */
+}
+
+
+    .logo img {
+      width: 500px;
+      max-width: 80%;
+	   
+    }
+
+    .icon-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* ⭐ 3 أعمدة ثابتة */
+         gap: 40px;
+        justify-items: center; /* توسيط الأيقونات */
+           align-items: center;
+      padding: 60px 30px;
+      max-width: 600px;
+      width: 100%;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+
+    .icon {
+  position: relative;               /* ⭐ مهم */
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: black;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgb(245, 238, 225);
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: box-shadow 0.35s ease;
+}
+
+.icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255,140,40,0.9),
+    rgba(255,140,40,0.3),
+    transparent 70%
+  );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  opacity: 1;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255,140,40,1),
+    rgba(255,180,90,1)
+  );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+/* ===== Hover أو Click ===== */
+.icon:hover::before {
+  opacity: 0;
+}
+
+.icon:hover::after {
+  opacity: 1;
+}
+
+.icon:hover {
+  box-shadow: 0 0 28px rgba(255,140,40,0.6);
+}
+
+
+    .icon img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 8px;
+      transition: transform 0.3s;
+    }
+
+    .icon:hover img {
+      transform: rotate(10deg) scale(1.1);
+    }
+
+/* ===== BUTTONS ===== */
+.btn-primary {
+  position: relative;
+  padding: 12px 26px;
+  border: none;
+  border-radius: 5px;
+  font-size: 19px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(
+    130deg,
+    rgba(20, 15, 10, 0.6),
+    rgba(140, 70, 25, 0.7),
+    rgba(255, 140, 40, 0.9)
+  );
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+  z-index: 1;
+}
+
+/* ===== الإطار (مخفي افتراضيًا) ===== */
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: 5px;
+
+  background: linear-gradient(
+    30deg,
+    rgba(20, 15, 10, 0.4),
+    rgba(140, 70, 25, 0.6),
+    rgba(255, 140, 40, 1)
+  );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+/* ===== Hover / Click ===== */
+.btn-primary:hover {
+  background: transparent; /* ⬅️ يختفي التعبئة */
+  box-shadow: 0 0 28px rgba(255,140,40,0.6);
+  color: white;
+}
+
+.btn-primary:hover::before {
+  opacity: 1; /* ⬅️ يظهر الإطار */
+}
+
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 500px) {
+
+      
+    .logo {
+  
+	  animation: fadeInDown 1s ease-in-out;
+	  align-items: center;
+	  margin: 40px 10px 1px auto;
+    }
+
+       .logo img {
+      width: 300px;
+      max-width: 80%;
+     
+    }
+
+      .icon-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* ⭐ 3 أعمدة ثابتة */
+  gap: 40px;
+  justify-items: center; /* توسيط الأيقونات */
+  align-items: center;
+  margin: auto;
+}
+
+      .icon {
+        width: 90px;
+        height: 90px;
+        font-size: 12px;
+      }
+      .icon img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  </style>
+  
+</head>
+<body>
+
+  <!-- الشعار -->
+  <div class="logo">
+    <img src="image/logo2.png" alt="Logo ">
+  </div>
+
+  <!-- أيقونات التواصل بشكل دائري متوازن -->
+  <div class="icon-container">
+
+
+    <a href="" target="_blank" class="icon">
+      <img src="icons/facebook.png" alt="Facebook">
+      <span>Facebook</span>
+    </a>
+    <a href="" class="icon">
+      <img src="icons/instagram.png" alt="Instagram">
+      <span>Instagram</span>
+    </a>
+    <a href="" target="_blank" class="icon">
+      <img src="icons/linkedin.png" alt="LinkedIn">
+      <span>LinkedIn</span>
+    </a>
+    <a href="" target="_blank" class="icon">
+      <img src="icons/whatsapp.png" alt="WhatsApp">
+      <span>WhatsApp</span>
+    </a>
+    <a href="" target="_blank" class="icon">
+      <img src="icons/telegram.png" alt="Telegram">
+      <span>Telegram</span>
+    </a>
+    <a href="" target="_blank" class="icon">
+      <img src="icons/youtube.png" alt="YouTube">
+      <span>YouTube</span>
+    </a>
+  
+  </div>
+ <button class="btn-primary" onclick="location.href='index.html'">العودة</button>
+</body>
+</html>
